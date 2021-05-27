@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Title</title>
+    <title>Corona</title>
 </head>
 <body>
 
-    <h1>Coronavirus Tracker Application</h1>
-    <p>This application lists the current number of cases reported across the globe</p>
+    <h1 class="text-center">Theo dõi số ca mắc Corona</h1>
+    <p class="text-center">Ứng dụng này liệt kê số lượng trường hợp hiện tại được báo cáo trên toàn cầu</p>
 
     <div class="jumbotron">
         <h1 class="display-4" th:text="${totalReportedCases}"></h1>
-        <p class="lead">Total cases reported as of today</p>
+        <p class="lead">Tổng số trường hợp được báo cáo tính đến ngày hôm nay</p>
         <hr class="my-4">
         <p>
-            <span>New cases reported since previous day:</span>
+            <span>Các trường hợp mới được báo cáo kể từ ngày hôm trước:</span>
             <span th:text="${totalNewCase}"></span>
         </p>
 
@@ -24,10 +24,10 @@
 
     <table class="table">
         <tr>
-            <th>State</th>
-            <th>Country</th>
-            <th>Total cases reported</th>
-            <th>Changes since last day</th>
+            <th>Bang</th>
+            <th>Quốc gia</th>
+            <th>Tổng số trường hợp được báo cáo</th>
+            <th>Các ca từ ngày hôm trước</th>
         </tr>
         <tr th:each="locationStat : ${locationStats}">
             <td th:text="${locationStat.state}"></td>

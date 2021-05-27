@@ -28,21 +28,29 @@ public class CoronaVirusDataService {
     }
 
     @PostConstruct
-    @Scheduled(cron = "* * 1 * * *")
+    @Scheduled(cron = "* * 2 * * *")
     public void fetchVirusData() throws IOException, InterruptedException {
+
         List<LocationStats> newStarts = new ArrayList<>();
+
         HttpClient client = HttpClient.newHttpClient();
+
+        // yêu cầu truy cập link VIRUS_DATA_URL
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(VIRUS_DATA_URL))
                 .build();
+
         HttpResponse<String> httpResponse =  client.send(request, HttpResponse.BodyHandlers.ofString());
 
         StringReader csvReader = new StringReader(httpResponse.body());
+
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(csvReader);
         for (CSVRecord record: records) {
+
             LocationStats locationStats = new LocationStats();
             locationStats.setState(record.get("Province/State"));
             locationStats.setCountry(record.get("Country/Region"));
+
             int latestCases = (Integer.parseInt(record.get(record.size() - 1)));
             int prevDayCases = (Integer.parseInt(record.get(record.size() - 2)));
             locationStats.setLatestTotalCases(latestCases);
