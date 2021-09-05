@@ -13,10 +13,14 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    @Autowired
-    CoronaVirusDataService coronaVirusDataService;
+    private final CoronaVirusDataService coronaVirusDataService;
 
-    @GetMapping("/")
+    @Autowired
+    public HomeController(CoronaVirusDataService coronaVirusDataService) {
+        this.coronaVirusDataService = coronaVirusDataService;
+    }
+
+    @GetMapping("/covid")
     public String home(Model model){
         List<LocationStats> allStart = coronaVirusDataService.getAllStarts();
         int totalReport = allStart.stream().mapToInt(s -> s.getLatestTotalCases()).sum();
